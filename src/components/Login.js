@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { getRequest } from "../apis/apis";
+import { getRequest, postRequest } from "../apis/apis";
 
 const Login = () => {
     const [email,setEmail] = useState(null);
     const [password,setPassword] = useState(null);
 
-    const handleSubmit = (e)=>{
+    const handleSubmit =async (e)=>{
         e.preventDefault();
         console.log(email,password);
-        getRequest();
+        let baseUrl = process.env.REACT_BASE_URL;
+        let loginUrl = baseUrl+'login'
+        await postRequest(loginUrl,{email,password});
     }
 
   return (
